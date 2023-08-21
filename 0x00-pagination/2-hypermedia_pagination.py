@@ -35,14 +35,15 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """ gets a  page for the dataset """
+
         start, stop = index_range(page, page_size)
-        if not self.__dataset:
-            self.dataset()
+        self.dataset()
         assert isinstance(page, int) and isinstance(page_size, int)
         assert page > 0 and page_size > 0
         try:
-            result = [self.__dataset[i] for i in range(start, stop)]
-        except (IndexError):
+            result = self.__dataset[start:stop]
+        except IndexError:
             result = []
 
         return result
@@ -51,20 +52,14 @@ class Server:
         """ Returns a dictionary of implementation of data """
 
         pages = self.get_page(page, page_size)
-        next_page = page + 1
-        prev_page = page - 1
-        total_pages = math.ceil(len(self.__dataset) / page_size)
-        if prev_page == 0:
-            prev_page = None
-        if next_page > total_pages:
-            next_page = None
+        total_pages = math.ceil(len(self.dataset()) / page_size)
 
         result = {
-            'page_size': page_size,
+            'page_size': len(pages),
             'page': page,
             'data': pages,
-            'next_page': next_page,
-            'prev_page': prev_page,
+            'next_page': page + 1 if page < total_pages else None,
+            'prev_page': page - 1 if page > 1 else None,
             'total_pages': total_pages
         }
 

@@ -34,14 +34,15 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """ gets a  page for the dataset """
+
         start, stop = index_range(page, page_size)
-        if not self.__dataset:
-            self.dataset()
+        self.dataset()
         assert isinstance(page, int) and isinstance(page_size, int)
         assert page > 0 and page_size > 0
         try:
-            result = [self.__dataset[i] for i in range(start, stop)]
-        except (IndexError):
+            result = self.__dataset[start:stop]
+        except IndexError:
             result = []
 
         return result
