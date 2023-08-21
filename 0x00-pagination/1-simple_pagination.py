@@ -40,9 +40,6 @@ class Server:
         self.dataset()
         assert isinstance(page, int) and isinstance(page_size, int)
         assert page > 0 and page_size > 0
-        try:
-            result = self.__dataset[start:stop]
-        except IndexError:
-            result = []
+        result = self.__dataset[start:stop]
 
         return result
