@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
+""" This module implelments the fifo algorithm in caching"""
 from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    """ The First in first out caching system """
+    """ The First in first out caching system inheriting from base_caching """
 
     def __init__(self):
-        """
-            Initialization instance method
-        """
+        """ Initialization instance method """
+
         super().__init__()
         self.cache_list = []
 

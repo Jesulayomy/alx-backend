@@ -24,8 +24,6 @@ class LRUCache(BaseCaching):
                 del self.cache_queue[discard]
                 print("DISCARD: {}".format(discard))
 
-        self.cache_data[key] = item
-
     def get(self, key):
         """ Retrieves an item from the cache data by key """
 
