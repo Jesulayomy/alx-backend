@@ -9,24 +9,23 @@ class LIFOCache(BaseCaching):
     """
 
     def __init__(self):
-        """
-            Initialization instance init
-        """
+        """ Initialization instance init """
 
         super().__init__()
+        self.cache_list = []
 
     def put(self, key, item):
         """
             Insert a new item in the cache data, behaving like a stack
         """
 
-        if key is None or item is None:
-            return
-
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
-            last_item = list(self.cache_data.keys())[-1]
-            print("DISCARD: {}".format(last_item))
-            self.cache_data.pop(last_item)
+        if key and item:
+            self.cache_data[key] = item
+            if len(self.cache_data) > self.MAX_ITEMS:
+                discard = self.cache_list.pop()
+                del self.cache_data[discard]
+                print("DISCARD: {}".format(discard))
+            self.cache_list.append(key)
 
     def get(self, key):
         """

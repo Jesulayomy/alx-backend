@@ -4,7 +4,7 @@ from base_caching import BaseCaching
 from datetime import datetime
 
 
-class LRUCaching(BaseCaching):
+class LRUCache(BaseCaching):
     """ Last Recently Used Caching System """
 
     def __init__(self):
